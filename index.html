@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мир Рыбалки</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            position: relative;
+            text-align: center;
+            color: white;
+        }
+        header img {
+            width: 100%;
+            height: auto;
+        }
+        header h1 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3em;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 0.5em;
+            border-radius: 10px;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #87cefa;
+            padding: 1em;
+        }
+        nav a {
+            margin: 0 15px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        main {
+            padding: 2em;
+        }
+        .content {
+            margin-bottom: 2em;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1em;
+        }
+        .gallery img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+        .gallery img:hover {
+            transform: scale(1.05);
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+            padding-top: 60px;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            border-radius: 10px;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .faq h3 {
+            cursor: pointer;
+            background-color: #87cefa;
+            color: white;
+            padding: 1em;
+            margin: 0;
+            border: 1px solid #4682b4;
+            border-radius: 5px;
+        }
+        .faq p {
+            display: none;
+            padding: 1em;
+            border: 1px solid #4682b4;
+            border-top: none;
+            margin: 0;
+        }
+        footer {
+            background-color: #4682b4;
+            color: white;
+            text-align: center;
+            padding: 1em;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="img/1.webp" alt="Мир Рыбалки">
+        <h1>Мир Рыбалки</h1>
+    </header>
+    <nav>
+        <a href="#about">О Рыбалке</a>
+        <a href="#tips">Советы</a>
+        <a href="#places">Лучшие Места</a>
+        <a href="#gallery">Галерея</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Контакты</a>
+    </nav>
+    <main>
+        <section id="about" class="content">
+            <h2>О Рыбалке</h2>
+            <p>Рыбалка — это замечательное хобби, которое позволяет отдохнуть на природе и насладиться процессом ловли рыбы. Это занятие требует терпения, знаний и некоторых навыков. На нашем сайте вы найдете множество полезной информации о рыбалке, видах рыбы и способах ловли.</p>
+        </section>
+        <section id="tips" class="content">
+            <h2>Советы по Рыбалке</h2>
+            <ul>
+                <li><a href="#" onclick="openModal('modalTip1')">Выбирайте правильное время для рыбалки</a></li>
+                <li><a href="#" onclick="openModal('modalTip2')">Используйте качественные снасти и приманки</a></li>
+                <li><a href="#" onclick="openModal('modalTip3')">Исследуйте места, где планируете рыбачить</a></li>
+                <li><a href="#" onclick="openModal('modalTip4')">Учитывайте погодные условия</a></li>
+            </ul>
+        </section>
+        <section id="places" class="content">
+            <h2>Лучшие Места для Рыбалки</h2>
+            <p>В России множество отличных мест для рыбалки. Вот несколько из них:</p>
+            <ul>
+                <li><a href="https://ru.wikipedia.org/wiki/%D0%92%D0%BE%D0%BB%D0%B3%D0%B0" target="_blank">Волга</a> — одна из самых известных рек для рыбалки.</li>
+                <li><a href="https://ru.wikipedia.org/wiki/%D0%91%D0%B0%D0%B9%D0%BA%D0%B0%D0%BB" target="_blank">Байкал</a> — озеро, богатое разнообразными видами рыбы.</li>
+                <li><a href="https://ru.wikipedia.org/wiki/%D0%9B%D0%B0%D0%B4%D0%BE%D0%B6%D1%81%D0%BA%D0%BE%D0%B5_%D0%BE%D0%B7%D0%B5%D1%80%D0%BE" target="_blank">Ладожское озеро</a> — прекрасное место для ловли судака и щуки.</li>
+                <li><a href="https://ru.wikipedia.org/wiki/%D0%9E%D0%B1%D1%8C" target="_blank">Река Обь</a> — популярное место для зимней рыбалки.</li>
+            </ul>
+        </section>
+        <section id="gallery" class="content">
+            <h2>Галерея</h2>
+            <div class="gallery">
+                <img src="img/okun.jpeg" alt="Окунь" onclick="openModal('modal2')">
+                <img src="img/karas.jpeg" alt="Карась" onclick="openModal('modal3')">
+                <img src="img/yaz.jpg" alt="Язь" onclick="openModal('modal4')">
+                <img src="img/sudak.jpeg" alt="Судак" onclick="openModal('modal5')">
+                <img src="img/lin.jpeg" alt="Линь" onclick="openModal('modal6')">
+                <img src="img/golavl.jpg" alt="Голавль" onclick="openModal('modal7')">
+                <img src="img/lesh.jpeg" alt="Лещ" onclick="openModal('modal8')">
+                <img src="img/plotva.jpg" alt="Плотва" onclick="openModal('modal9')">
+                <img src="img/som.jpg" alt="Сом" onclick="openModal('modal10')">
+                <img src="img/forel.webp" alt="Форель" onclick="openModal('modal11')">
+            </div>
+        </section>
+
+        <!-- Modals for Fish -->
+        <div id="modal1" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('modal1')">&times;</span>
+                <h2>Загруженное изображение</h2>
+                <p>Описание загруженного изображения.</p>
+            </div>
+        </div>
+
+        <div id="modal2" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('modal2')">&times;</span>
+                <h2>Окунь</h2>
+                <p>Окунь — это рыба, обитающая в пресных водах. Он известен своей агрессивностью и мощными поклевками, что делает его популярным объектом среди рыболовов. Окунь отличается характерной окраской и полосами на теле.</p>
+            </div>
+        </div>
+
+        <div id="modal3" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('modal3')">&times;</span>
+                <h2>Карась</h2>
+                <p>Карась — это пресноводная рыба, обитающая в озерах и реках. Карась легко адаптируется к различным условиям обитания и является популярной рыбой среди рыболовов.</p>
+            </div>
+        </div>
+
+        <div id="modal4" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('modal4')">&times;</span>
+                <h2>Язь</h2>
+                <p>Язь — это рыба семейства карповых, обитающая в пресных водах. Язь известен своим вкусным мясом и является популярной рыбой среди рыболовов.</p>
+            </div>
+        </div>
+
+        <div id="modal5" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('modal5')">&times;</span>
+                <h2>Судак</h2>
+                <p>Судак — это хищная рыба, обитающая в пресных водах. Судак известен своим вкусным мясом и является желанной добычей для многих рыболовов.</p>
+            </div>
+        </div>
+
+        <div id="modal6" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('modal6')">&times;</span>
+                <h2>Линь</h2>
+                <p>Линь — это пресноводная рыба семейства карповых. Линь отличается своим толстым телом и зеленоватым окрасом. Линь предпочитает спокойные водоемы с густой растительностью.</p>
+            </div>
+        </div>
+
+        <div id="modal7" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('modal7')">&times;</span>
+                <h2>Голавль</h2>
+                <p>Голавль — это рыба семейства карповых, обитающая в реках и озерах. Голавль известен своей бойкостью и является популярной рыбой среди рыболовов.</p>
+            </div>
+        </div>
+
+        <div id="modal8" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('modal8')">&times;</span>
+                <h2>Лещ</h2>
+                <p>Лещ — это пресноводная рыба семейства карповых. Лещ предпочитает глубокие водоемы с медленным течением и является популярной рыбой среди рыболовов.</p>
+            </div>
+        </div>
+
+        <div id="modal9" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('modal9')">&times;</span>
+                <h2>Плотва</h2>
+                <p>Плотва — это рыба семейства карповых, обитающая в пресных водах. Плотва отличается своим серебристым окрасом и является популярной рыбой среди рыболовов.</p>
+            </div>
+        </div>
+
+        <div id="modal10" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('modal10')">&times;</span>
+                <h2>Сом</h2>
+                <p>Сом — это крупная хищная рыба, обитающая в пресных водах. Сом известен своими внушительными размерами и является желанной добычей для многих рыболовов.</p>
+            </div>
+        </div>
+
+        <div id="modal11" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('modal11')">&times;</span>
+                <h2>Форель</h2>
+                <p>Форель — это хищная рыба семейства лососевых, обитающая в холодных пресных водах. Форель известна своим вкусным мясом и является популярной рыбой среди рыболовов.</p>
+            </div>
+        </div>
+
+        <!-- Modals for Tips -->
+        <div id="modalTip1" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('modalTip1')">&times;</span>
+                <h2>Выбирайте правильное время для рыбалки</h2>
+                <p>Утром и вечером рыба наиболее активна. Это связано с тем, что температура воды и количество света в это время суток оптимальны для большинства видов рыб.</p>
+            </div>
+        </div>
+
+        <div id="modalTip2" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('modalTip2')">&times;</span>
+                <h2>Используйте качественные снасти и приманки</h2>
+                <p>Качественные снасти и приманки помогут увеличить ваши шансы на успешную рыбалку. Обращайте внимание на качество материалов и проверяйте снасти перед каждой рыбалкой.</p>
+            </div>
+        </div>
+
+        <div id="modalTip3" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('modalTip3')">&times;</span>
+                <h2>Исследуйте места, где планируете рыбачить</h2>
+                <p>Перед рыбалкой стоит изучить водоем, узнать о глубине, наличии растительности и других особенностях. Это поможет выбрать правильное место и повысить вероятность успешного улова.</p>
+            </div>
+        </div>
+
+        <div id="modalTip4" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('modalTip4')">&times;</span>
+                <h2>Учитывайте погодные условия</h2>
+                <p>Пасмурная погода часто благоприятствует рыбалке. Рыба чувствует себя безопаснее и чаще выходит на кормежку. Однако сильный ветер и дождь могут сделать рыбалку сложнее.</p>
+            </div>
+        </div>
+
+        <section id="faq" class="content faq">
+            <h2>Часто Задаваемые Вопросы (FAQ)</h2>
+            <div class="faq-item">
+                <h3 onclick="toggleFaq('faq1')">Как выбрать правильные снасти для рыбалки?</h3>
+                <p id="faq1">Выбор снастей зависит от вида рыбы, которую вы планируете ловить, и от условий рыбалки. Обратитесь к специалистам в магазине снастей или изучите соответствующую литературу.</p>
+            </div>
+            <div class="faq-item">
+                <h3 onclick="toggleFaq('faq2')">Какая приманка лучше всего подходит для ловли щуки?</h3>
+                <p id="faq2">Для ловли щуки часто используют живца, блёсны и воблеры. Выбор приманки зависит от времени года и условий ловли.</p>
+            </div>
+            <div class="faq-item">
+                <h3 onclick="toggleFaq('faq3')">Где можно получить разрешение на рыбалку?</h3>
+                <p id="faq3">Разрешение на рыбалку можно получить в местных органах власти или через специализированные онлайн-сервисы.</p>
+            </div>
+        </section>
+        <section id="contact" class="content">
+            <h2>Контакты</h2>
+            <p>Если у вас есть вопросы или предложения, свяжитесь с нами:</p>
+            <p>Email: info@mirrybalki.ru</p>
+            <p>Телефон: +7 (123) 456-78-90</p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Мир Рыбалки. Все права защищены.</p>
+    </footer>
+
+    <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = "block";
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+        }
+
+        function toggleFaq(faqId) {
+            var faq = document.getElementById(faqId);
+            if (faq.style.display === "block") {
+                faq.style.display = "none";
+            } else {
+                faq.style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>
